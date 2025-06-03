@@ -1,8 +1,9 @@
-import 'package:fridgeeye/app/modules/register/views/verify_otp_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/detail/bindings/detail_binding.dart';
 import '../modules/detail/views/detail_view.dart';
+import '../modules/deteksi/bindings/deteksi_binding.dart';
+import '../modules/deteksi/views/deteksi_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -15,6 +16,7 @@ import '../modules/recipe/bindings/recipe_binding.dart';
 import '../modules/recipe/views/recipe_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/register/views/verify_otp_view.dart';
 import '../modules/welcome/bindings/welcome_binding.dart';
 import '../modules/welcome/views/welcome_view.dart';
 
@@ -60,6 +62,11 @@ class AppRoutes {
       name: '/verify-otp',
       page: () => VerifyOtpView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: '/deteksi',
+      page: () => DeteksiView(),
+      binding: DeteksiBinding(),
     ),
   ];
 }

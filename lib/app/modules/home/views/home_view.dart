@@ -110,7 +110,9 @@ class HomeView extends GetView<HomeController> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed('/deteksi');
+        },
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

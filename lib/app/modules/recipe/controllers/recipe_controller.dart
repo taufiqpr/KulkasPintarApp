@@ -7,6 +7,8 @@ class RecipeController extends GetxController {
   var isDetailLoading = false.obs;
   var isLoading = false.obs;
   var errorMessage = ''.obs;
+  var isLiked = false.obs;
+  var likedRecipes = <int, Map<String, dynamic>>{}.obs;
 
   final _recipeProvider = Get.find<RecipeProvider>();
 
@@ -19,7 +21,6 @@ class RecipeController extends GetxController {
       var response = await _recipeProvider.getRecipes(query);
       print('Received response: $response');
 
-      // Optional: pastikan setiap item memiliki key 'image' dan 'title'
       recipes.value = response.map((recipe) {
         return {
           'id': recipe['id'],
@@ -38,6 +39,20 @@ class RecipeController extends GetxController {
       isLoading(false);
     }
   }
+
+  void toggleLike(Map<String, dynamic> recipe) {
+  int id = recipe['id'];
+  if (likedRecipes.containsKey(id)) {
+    likedRecipes.remove(id);
+  } else {
+    likedRecipes[id] = recipe;
+  }
+}
+
+bool isRecipeLiked(int id) {
+  return likedRecipes.containsKey(id);
+}
+
 
   Future<void> fetchRecipeDetail(int id) async {
     try {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fridgeeye/app/modules/recipe/controllers/recipe_controller.dart';
 import 'package:get/get.dart';
 import 'dart:ui';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({super.key});
+  final recipeController = Get.find<RecipeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,74 @@ class ProfileView extends GetView<ProfileController> {
                   ),
 
                   const SizedBox(height: 24),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Resep Favorit",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  Obx(() {
+                    final favorites =
+                        recipeController.likedRecipes.values.toList();
+
+                    if (favorites.isEmpty) {
+                      return const Text("Belum ada resep favorit.");
+                    }
+
+                    return Column(
+                      children: favorites.map((recipe) {
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  recipe['image'],
+                                  width: 60,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(recipe['title'],
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600)),
+                                    const SizedBox(height: 4),
+                                    Text(recipe['duration'],
+                                        style: const TextStyle(
+                                            color: Colors.grey)),
+                                  ],
+                                ),
+                              ),
+                              const Icon(Icons.favorite, color: Colors.red),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  }),
 
                   // Menu
                   _menuTile(Icons.notifications, "Notifikasi",

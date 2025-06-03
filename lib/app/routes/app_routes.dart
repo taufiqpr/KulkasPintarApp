@@ -12,6 +12,7 @@ abstract class Routes {
   static const DETAIL = _Paths.DETAIL;
   static const WELCOME = _Paths.WELCOME;
   static const VERIFY_OTP = _Paths.VERIFY_OTP;
+  static const DETEKSI = _Paths.DETEKSI;
 }
 
 abstract class _Paths {
@@ -26,4 +27,5 @@ abstract class _Paths {
   static const DETAIL = '/detail';
   static const WELCOME = '/welcome';
   static const VERIFY_OTP = '/verify-otp';
+  static const DETEKSI = '/deteksi';
 }

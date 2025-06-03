@@ -17,12 +17,10 @@ class Welcome2View extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Gambar ilustrasi
               Image.asset(
-                'assets/images/unsplash_AEU9UZstCfs.png',
-                height: size.height * 0.45,
+                'assets/images/Live tracking vector 1.png',
+                height: size.height * 0.60,
               ),
-
               Column(
                 children: const [
                   Text(
@@ -45,7 +43,6 @@ class Welcome2View extends StatelessWidget {
                   ),
                 ],
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -65,7 +62,6 @@ class Welcome2View extends StatelessWidget {
                   CircleAvatar(radius: 4, backgroundColor: Colors.tealAccent),
                 ],
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

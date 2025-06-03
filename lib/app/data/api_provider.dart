@@ -4,7 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ApiProvider {
-  final String baseUrl = "http://127.0.0.1:5000";
+  final String baseUrl = "http://192.168.137.234:5000";
   final box = GetStorage();
 
   Future<String?> registerUser(

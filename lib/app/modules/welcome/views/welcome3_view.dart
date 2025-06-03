@@ -16,10 +16,9 @@ class Welcome3View extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Gambar ilustrasi
               Image.asset(
-                'assets/images/unsplash_AEU9UZstCfs.png',
-                height: size.height * 0.45,
+                'assets/images/Frame.png',
+                height: size.height * 0.60,
               ),
               Column(
                 children: const [
@@ -43,7 +42,6 @@ class Welcome3View extends StatelessWidget {
                   ),
                 ],
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -63,8 +61,6 @@ class Welcome3View extends StatelessWidget {
                   ),
                 ],
               ),
-
-              // Tombol navigasi
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

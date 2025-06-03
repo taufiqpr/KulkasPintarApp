@@ -17,13 +17,10 @@ class WelcomeView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Ilustrasi
               Image.asset(
-                'assets/images/unsplash_AEU9UZstCfs.png',
-                height: size.height * 0.45,
+                'assets/images/Group 6819.png',
+                height: size.height * 0.55,
               ),
-
-              // Judul dan deskripsi
               Column(
                 children: const [
                   Text(
@@ -46,8 +43,6 @@ class WelcomeView extends StatelessWidget {
                   ),
                 ],
               ),
-
-              // Indikator halaman
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -67,8 +62,6 @@ class WelcomeView extends StatelessWidget {
                       radius: 4, backgroundColor: Colors.tealAccent),
                 ],
               ),
-
-              // Tombol navigasi
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

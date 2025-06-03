@@ -30,7 +30,7 @@ class VerifyOtpView extends GetView<RegisterController> {
               const SizedBox(height: 12),
               Center(
                 child: Image.asset(
-                  'assets/images/otp_image.png',
+                  'assets/images/Rating.png',
                   height: 200,
                 ),
               ),
@@ -55,7 +55,7 @@ class VerifyOtpView extends GetView<RegisterController> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "+62 - 12989200823",
+                      controller.email.value,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),
