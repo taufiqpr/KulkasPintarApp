@@ -15,7 +15,7 @@ class HomeView extends GetView<HomeController> {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           children: [
             const Text(
-              '👋 Selamat Pagi',
+              '👋 Selamat Datang',
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
             const SizedBox(height: 4),
@@ -94,7 +94,7 @@ class HomeView extends GetView<HomeController> {
                   icon: const Icon(Icons.home, color: Colors.teal),
                   onPressed: () => Get.offNamed('/home')),
               IconButton(
-                  icon: const Icon(Icons.bookmark, color: Colors.grey),
+                  icon: const Icon(Icons.restaurant_menu, color: Colors.grey),
                   onPressed: () => Get.offNamed('/recipe')),
               const SizedBox(width: 40),
               IconButton(
@@ -113,7 +113,11 @@ class HomeView extends GetView<HomeController> {
         onPressed: () {
           Get.toNamed('/deteksi');
         },
-        child: const Icon(Icons.add),
+        shape: CircleBorder(),
+        child: const Icon(
+          Icons.photo_camera_outlined,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

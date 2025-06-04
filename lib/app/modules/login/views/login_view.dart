@@ -84,10 +84,17 @@ class LoginView extends GetView<LoginController> {
                       TextField(
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          hintText: "Enter email",
+                          labelText: "Email",
+                          labelStyle: TextStyle(color: Colors.grey[700]),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.teal),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon:
+                              Icon(Icons.email_outlined, color: Colors.teal),
                         ),
                         onChanged: (val) => controller.email.value = val,
                       ),

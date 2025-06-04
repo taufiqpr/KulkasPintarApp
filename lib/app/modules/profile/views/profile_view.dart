@@ -210,7 +210,7 @@ class ProfileView extends GetView<ProfileController> {
                 onPressed: () => Get.offNamed('/home'),
               ),
               IconButton(
-                icon: const Icon(Icons.bookmark, color: Colors.grey),
+                icon: const Icon(Icons.restaurant_menu, color: Colors.grey),
                 onPressed: () => Get.toNamed('/recipe'),
               ),
               const SizedBox(width: 40),

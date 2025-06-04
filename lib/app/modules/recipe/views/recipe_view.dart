@@ -47,7 +47,7 @@ class RecipeView extends GetView<RecipeController> {
                         hintText: "Masak apa hari ini?",
                         prefixIcon: const Icon(Icons.search),
                         suffixIcon: IconButton(
-                          icon: const Icon(Icons.search),
+                          icon: const Icon(Icons.tune),
                           onPressed: () {
                             if (searchController.text.isNotEmpty) {
                               controller.fetchRecipes(searchController.text);
@@ -85,17 +85,22 @@ class RecipeView extends GetView<RecipeController> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 12),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.teal,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                    Center(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.teal,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
+                        onPressed: () {
+                          // Aksi Lihat Resep
+                        },
+                        child: Text(
+                          "Lihat Resep",
+                          style: TextStyle(color: Colors.white),
+                        ), // bisa pakai const atau tidak
                       ),
-                      onPressed: () {
-                        // Aksi Lihat Resep
-                      },
-                      child: const Text("Lihat Resep"),
                     ),
                     const SizedBox(height: 8),
                     const Center(
@@ -182,7 +187,7 @@ class RecipeView extends GetView<RecipeController> {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.bookmark, color: Colors.teal),
+                icon: const Icon(Icons.restaurant_menu, color: Colors.teal),
                 onPressed: () {
                   Get.toNamed('/recipe');
                 },
