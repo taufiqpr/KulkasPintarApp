@@ -74,7 +74,10 @@ class Welcome2View extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Get.to(() => const Welcome3View());
+                      Get.to(() => const Welcome3View(),
+                          transition:
+                              Transition.rightToLeft, // animasi geser ke kiri
+                          duration: const Duration(milliseconds: 400));
                     },
                     child: const Text("Next",
                         style: TextStyle(color: Colors.black87)),

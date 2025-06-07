@@ -161,7 +161,9 @@ class LoginView extends GetView<LoginController> {
                           IconButton(
                             icon: const Icon(FontAwesomeIcons.google,
                                 color: Colors.red),
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.loginWithGoogle();
+                            },
                           ),
                           const SizedBox(width: 16),
                           IconButton(

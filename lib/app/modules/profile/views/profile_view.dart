@@ -39,7 +39,6 @@ class ProfileView extends GetView<ProfileController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Foto profil
                   Stack(
                     alignment: Alignment.bottomRight,
                     children: [

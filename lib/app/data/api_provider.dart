@@ -59,7 +59,7 @@ class ApiProvider {
     );
 
     if (response.statusCode == 200) {
-      return null; 
+      return null;
     } else {
       return jsonDecode(response.body)['message'];
     }
@@ -81,6 +81,35 @@ class ApiProvider {
       }
     } catch (e) {
       Get.snackbar("Error", "Login gagal");
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> googleSignIn(
+      String idToken, String? name, String? email, String? photoUrl) async {
+    final url = Uri.parse('$baseUrl/google_auth');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({'id_token': idToken}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
+        box.write('token', data['token']);
+        box.write('name', name ?? '');
+        box.write('email', email ?? '');
+        box.write('photo', photoUrl ?? '');
+
+        return data;
+      } else {
+        throw jsonDecode(response.body)['message'] ?? "Login Google gagal";
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Login Google gagal");
       rethrow;
     }
   }
