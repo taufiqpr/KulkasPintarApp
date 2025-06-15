@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class UserProvider {
   final _apiProvider = Get.find<ApiProvider>();
-  final String baseUrl = "http://127.0.0.1:5000";
+  final String baseUrl = "https://fridge-eye-flask.vercel.app";
 
   Map<String, String> get headers => {
         'Content-Type': 'application/json',

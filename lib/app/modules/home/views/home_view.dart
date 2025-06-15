@@ -39,8 +39,6 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Buah 1 - Apel
             _buildFruitItem(
               name: 'Apel',
               image: 'assets/images/Ellipse 1.png',
@@ -52,8 +50,6 @@ class HomeView extends GetView<HomeController> {
               purchaseDate: '10 Mei 2025',
               expiryDate: '21 Mei 2025',
             ),
-
-            // Buah 2 - Wortel
             _buildFruitItem(
               name: 'Wortel',
               image: 'assets/images/unsplash_R198mTymEFQ.png',
@@ -65,8 +61,6 @@ class HomeView extends GetView<HomeController> {
               purchaseDate: '15 Mei 2025',
               expiryDate: '21 Mei 2025',
             ),
-
-            // Buah 3 - Tomat
             _buildFruitItem(
               name: 'Tomat',
               image: 'assets/images/Ellipse 1-2.png',

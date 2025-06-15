@@ -31,7 +31,7 @@ class VerifyOtpView extends GetView<RegisterController> {
               Center(
                 child: Image.asset(
                   'assets/images/Rating.png',
-                  height: 200,
+                  height: 300,
                 ),
               ),
               const SizedBox(height: 24),
@@ -138,24 +138,6 @@ class VerifyOtpView extends GetView<RegisterController> {
                   ],
                 );
               }),
-              const SizedBox(height: 24),
-              Center(
-                child: GestureDetector(
-                  onTap: () => Get.offAllNamed('/login'),
-                  child: const Text.rich(
-                    TextSpan(
-                      text: "You have an account? ",
-                      children: [
-                        TextSpan(
-                          text: "Login",
-                          style: TextStyle(
-                              color: Colors.teal, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
         ),

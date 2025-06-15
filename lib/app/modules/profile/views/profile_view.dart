@@ -73,7 +73,6 @@ class ProfileView extends GetView<ProfileController> {
                     user['email'] ?? '',
                     style: const TextStyle(fontSize: 16, color: Colors.grey),
                   ),
-
                   const SizedBox(height: 24),
                   Align(
                     alignment: Alignment.centerLeft,
@@ -84,7 +83,6 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                   ),
                   const SizedBox(height: 12),
-
                   Obx(() {
                     final favorites =
                         recipeController.likedRecipes.values.toList();
@@ -143,19 +141,14 @@ class ProfileView extends GetView<ProfileController> {
                       }).toList(),
                     );
                   }),
-
-                  // Menu
                   _menuTile(Icons.notifications, "Notifikasi",
                       () => Get.toNamed('/notifications')),
-                  _menuTile(
-                      Icons.lock, "Privasi", () => Get.toNamed('/privacy')),
-                  _menuTile(Icons.help_outline, "Bantuan & Dukungan",
-                      () => Get.toNamed('/help')),
-
+                  _menuTile(Icons.question_answer_sharp, "FAQ",
+                      () => Get.toNamed('/FAQ')),
+                  _menuTile(Icons.history_toggle_off_outlined, "Riwayat Login",
+                      () => Get.toNamed('/history-login')),
                   const SizedBox(height: 20),
-
                   Divider(color: Colors.grey.shade300, thickness: 1),
-
                   GestureDetector(
                     onTap: () {
                       controller.logout();

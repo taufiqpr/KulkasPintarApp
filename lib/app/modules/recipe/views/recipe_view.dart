@@ -30,7 +30,7 @@ class RecipeView extends GetView<RecipeController> {
       body: SafeArea(
         child: Column(
           children: [
-            // Search Bar
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               child: Row(
@@ -94,12 +94,12 @@ class RecipeView extends GetView<RecipeController> {
                           ),
                         ),
                         onPressed: () {
-                          // Aksi Lihat Resep
+                          controller.fetchRecipes('apple');
                         },
                         child: Text(
                           "Lihat Resep",
                           style: TextStyle(color: Colors.white),
-                        ), // bisa pakai const atau tidak
+                        ), 
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -192,7 +192,7 @@ class RecipeView extends GetView<RecipeController> {
                   Get.toNamed('/recipe');
                 },
               ),
-              const SizedBox(width: 40), // Space for FAB
+              const SizedBox(width: 40), 
               IconButton(
                 icon: const Icon(Icons.notifications_none, color: Colors.grey),
                 onPressed: () {

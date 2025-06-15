@@ -13,6 +13,8 @@ abstract class Routes {
   static const WELCOME = _Paths.WELCOME;
   static const VERIFY_OTP = _Paths.VERIFY_OTP;
   static const DETEKSI = _Paths.DETEKSI;
+  static const HISTORY_LOGIN = _Paths.HISTORY_LOGIN;
+  static const FAQ = _Paths.FAQ;
 }
 
 abstract class _Paths {
@@ -28,4 +30,6 @@ abstract class _Paths {
   static const WELCOME = '/welcome';
   static const VERIFY_OTP = '/verify-otp';
   static const DETEKSI = '/deteksi';
+  static const HISTORY_LOGIN = '/history-login';
+  static const FAQ = '/faq';
 }

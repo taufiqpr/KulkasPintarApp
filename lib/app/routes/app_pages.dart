@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 
+import '../modules/FAQ/bindings/faq_binding.dart';
+import '../modules/FAQ/views/faq_view.dart';
 import '../modules/detail/bindings/detail_binding.dart';
 import '../modules/detail/views/detail_view.dart';
 import '../modules/deteksi/bindings/deteksi_binding.dart';
 import '../modules/deteksi/views/deteksi_view.dart';
+import '../modules/historyLogin/bindings/history_login_binding.dart';
+import '../modules/historyLogin/views/history_login_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -67,6 +71,16 @@ class AppRoutes {
       name: '/deteksi',
       page: () => DeteksiView(),
       binding: DeteksiBinding(),
+    ),
+    GetPage(
+      name: '/history-login',
+      page: () => HistoryLoginView(),
+      binding: HistoryLoginBinding(),
+    ),
+    GetPage(
+      name: '/FAQ',
+      page: () => const FaqView(),
+      binding: FaqBinding(),
     ),
   ];
 }

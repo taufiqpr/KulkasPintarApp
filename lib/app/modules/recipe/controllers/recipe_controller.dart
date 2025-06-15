@@ -12,6 +12,12 @@ class RecipeController extends GetxController {
 
   final _recipeProvider = Get.find<RecipeProvider>();
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchRecipes('apple');
+  }
+
   Future<void> fetchRecipes(String query) async {
     try {
       isLoading(true);
@@ -41,18 +47,17 @@ class RecipeController extends GetxController {
   }
 
   void toggleLike(Map<String, dynamic> recipe) {
-  int id = recipe['id'];
-  if (likedRecipes.containsKey(id)) {
-    likedRecipes.remove(id);
-  } else {
-    likedRecipes[id] = recipe;
+    int id = recipe['id'];
+    if (likedRecipes.containsKey(id)) {
+      likedRecipes.remove(id);
+    } else {
+      likedRecipes[id] = recipe;
+    }
   }
-}
 
-bool isRecipeLiked(int id) {
-  return likedRecipes.containsKey(id);
-}
-
+  bool isRecipeLiked(int id) {
+    return likedRecipes.containsKey(id);
+  }
 
   Future<void> fetchRecipeDetail(int id) async {
     try {

@@ -8,6 +8,29 @@ class RecipeDetailPage extends StatelessWidget {
 
   RecipeDetailPage({super.key, required this.recipeId});
 
+  String extractNutrientFromSummary(String summary, String type) {
+    final regexMap = {
+      'Calories': RegExp(r'<b>(\d+)\s*calories</b>', caseSensitive: false),
+      'Protein': RegExp(r'<b>(\d+)g of protein</b>', caseSensitive: false),
+      'Fat': RegExp(r'<b>(\d+)g of fat</b>', caseSensitive: false),
+      'Carbohydrates':
+          RegExp(r'<b>(\d+)g of carbohydrates</b>', caseSensitive: false),
+    };
+
+    final match = regexMap[type]?.firstMatch(summary);
+    if (match != null && match.groupCount >= 1) {
+      switch (type) {
+        case 'Calories':
+          return "${match.group(1)} kcal";
+        case 'Protein':
+        case 'Fat':
+        case 'Carbohydrates':
+          return "${match.group(1)} g";
+      }
+    }
+    return "-";
+  }
+
   @override
   Widget build(BuildContext context) {
     controller.fetchRecipeDetail(recipeId);
@@ -25,14 +48,18 @@ class RecipeDetailPage extends StatelessWidget {
           return const Center(child: Text("Data tidak ditemukan."));
         }
 
-        // Ambil nutrisi dari list nutrients
         final nutrients = detail['nutrition']?['nutrients'] ?? [];
         String getNutrient(String name) {
           final item = nutrients.firstWhere(
             (e) => e['name']?.toLowerCase() == name.toLowerCase(),
             orElse: () => {},
           );
-          return item.isNotEmpty ? "${item['amount']} ${item['unit']}" : '-';
+
+          if (item.isNotEmpty) {
+            return "${item['amount']} ${item['unit']}";
+          } else {
+            return extractNutrientFromSummary(detail['summary'] ?? '', name);
+          }
         }
 
         final ingredients = detail['extendedIngredients'] ?? [];
@@ -73,8 +100,6 @@ class RecipeDetailPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                // Card Detail
                 Container(
                   margin: const EdgeInsets.only(top: 16),
                   padding: const EdgeInsets.all(20),
@@ -135,7 +160,6 @@ class RecipeDetailPage extends StatelessWidget {
                               ))
                         ],
                       ),
-
                       const SizedBox(height: 8),
                       Row(
                         children: [
@@ -152,13 +176,13 @@ class RecipeDetailPage extends StatelessWidget {
                             fontSize: 14, color: Colors.black87),
                       ),
                       const SizedBox(height: 16),
-
-                      // Nutrition Info
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _nutritionItem("Carbs", getNutrient('Carbohydrates'),
-                              Icons.local_dining),
+                          _nutritionItem(
+                              "Health",
+                              "${detail['healthScore'] ?? '-'}%",
+                              Icons.favorite),
                           _nutritionItem("Protein", getNutrient('Protein'),
                               Icons.fitness_center),
                           _nutritionItem("Calories", getNutrient('Calories'),
@@ -167,81 +191,145 @@ class RecipeDetailPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 24),
-
-                      // Tabs
                       DefaultTabController(
                         length: 2,
                         child: Column(
                           children: [
                             Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(25),
                                 color: const Color(0xFFF2F4F7),
                               ),
-                              child: const TabBar(
+                              child: TabBar(
                                 labelColor: Colors.white,
                                 unselectedLabelColor: Colors.black54,
-                                indicator: BoxDecoration(
-                                  color: Color(0xFF2C827F),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
+                                labelStyle: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
                                 ),
-                                tabs: [
+                                unselectedLabelStyle: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                ),
+                                indicator: BoxDecoration(
+                                  color: const Color(0xFF2C827F),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                dividerColor: Colors.transparent,
+                                tabs: const [
                                   Tab(text: "Bahan-bahan"),
                                   Tab(text: "Cara Memasak"),
                                 ],
                               ),
                             ),
+                            const SizedBox(height: 16),
                             SizedBox(
-                              height: 250,
+                              height: 300,
                               child: TabBarView(
                                 children: [
-                                  // Bahan-bahan
                                   ListView.builder(
-                                    padding: const EdgeInsets.only(top: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
                                     itemCount: ingredients.length,
                                     itemBuilder: (context, index) {
                                       final item = ingredients[index];
                                       final name = item['original'] ?? '';
 
-                                      return ListTile(
-                                        leading: CircleAvatar(
-                                          backgroundColor:
-                                              const Color(0xFF2C827F),
-                                          child: Text(
-                                            '${index + 1}',
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                          ),
+                                      return Container(
+                                        margin:
+                                            const EdgeInsets.only(bottom: 12),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 32,
+                                              height: 32,
+                                              decoration: const BoxDecoration(
+                                                color: Color(0xFF2C827F),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  '${index + 1}',
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 16),
+                                            Expanded(
+                                              child: Text(
+                                                name,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.black87,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        title: Text(name),
                                       );
                                     },
                                   ),
-
-                                  // Cara Memasak
                                   ListView.builder(
-                                    padding: const EdgeInsets.only(top: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
                                     itemCount: steps.length,
                                     itemBuilder: (context, index) {
                                       final step = steps[index];
-                                      return ListTile(
-                                        leading: CircleAvatar(
-                                          backgroundColor:
-                                              const Color(0xFF2C827F),
-                                          child: Text(
-                                            '${step['number']}',
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                          ),
+                                      return Container(
+                                        margin:
+                                            const EdgeInsets.only(bottom: 16),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 32,
+                                              height: 32,
+                                              decoration: const BoxDecoration(
+                                                color: Color(0xFF2C827F),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  '${step['number']}',
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 16),
+                                            Expanded(
+                                              child: Text(
+                                                step['step'] ?? '',
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.black87,
+                                                  height: 1.4,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        title: Text(step['step'] ?? ''),
                                       );
                                     },
                                   ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                       )
