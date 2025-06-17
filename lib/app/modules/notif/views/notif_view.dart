@@ -100,8 +100,14 @@ class NotifView extends GetView<NotifController> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
-        onPressed: () {},
-        child: const Icon(Icons.add),
+        onPressed: () {
+          Get.toNamed('/deteksi');
+        },
+        shape: CircleBorder(),
+        child: const Icon(
+          Icons.photo_camera_outlined,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

@@ -30,7 +30,6 @@ class RecipeView extends GetView<RecipeController> {
       body: SafeArea(
         child: Column(
           children: [
-            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               child: Row(
@@ -99,7 +98,7 @@ class RecipeView extends GetView<RecipeController> {
                         child: Text(
                           "Lihat Resep",
                           style: TextStyle(color: Colors.white),
-                        ), 
+                        ),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -192,7 +191,7 @@ class RecipeView extends GetView<RecipeController> {
                   Get.toNamed('/recipe');
                 },
               ),
-              const SizedBox(width: 40), 
+              const SizedBox(width: 40),
               IconButton(
                 icon: const Icon(Icons.notifications_none, color: Colors.grey),
                 onPressed: () {
@@ -212,9 +211,13 @@ class RecipeView extends GetView<RecipeController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
         onPressed: () {
-          // Aksi FAB
+          Get.toNamed('/deteksi');
         },
-        child: const Icon(Icons.add),
+        shape: CircleBorder(),
+        child: const Icon(
+          Icons.photo_camera_outlined,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

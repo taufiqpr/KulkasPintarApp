@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:fridgeeye/app/data/api_provider.dart';
 
 class LoginController extends GetxController {
@@ -8,6 +9,13 @@ class LoginController extends GetxController {
   var isLoading = false.obs;
 
   final apiProvider = Get.find<ApiProvider>();
+  final box = GetStorage();
+
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    clientId:
+        '465809809624-mtch196j1bvb016kar2l734daqat5kla.apps.googleusercontent.com',
+    scopes: ['email'],
+  );
 
   Future<void> login() async {
     if (email.value.isEmpty || password.value.isEmpty) {
@@ -32,14 +40,13 @@ class LoginController extends GetxController {
   }
 
   Future<void> loginWithGoogle() async {
-    final GoogleSignIn googleSignIn = GoogleSignIn(
-      clientId:
-          '465809809624-mtch196j1bvb016kar2l734daqat5kla.apps.googleusercontent.com',
-      scopes: ['email'],
-    );
-
     try {
       isLoading(true);
+
+      
+      await googleSignIn.signOut();
+
+
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
         isLoading(false);
@@ -75,5 +82,22 @@ class LoginController extends GetxController {
     } finally {
       isLoading(false);
     }
+  }
+
+
+  Future<void> logoutGoogle() async {
+    try {
+      await googleSignIn.signOut();
+      print("Google user logged out");
+    } catch (e) {
+      print("Error saat logout Google: $e");
+    }
+  }
+
+  
+  Future<void> logout() async {
+    await logoutGoogle();
+    box.erase(); 
+    Get.offAllNamed('/login');
   }
 }

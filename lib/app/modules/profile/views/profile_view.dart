@@ -3,12 +3,15 @@ import 'package:fridgeeye/app/modules/recipe/controllers/recipe_controller.dart'
 import 'package:get/get.dart';
 import 'dart:ui';
 import '../controllers/profile_controller.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final recipeController = Get.find<RecipeController>();
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    final photoUrl = box.read('photo') ?? '';
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9FC),
       appBar: AppBar(
@@ -44,7 +47,10 @@ class ProfileView extends GetView<ProfileController> {
                     children: [
                       CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage('assets/images/minion.png'),
+                        backgroundImage: photoUrl.isNotEmpty
+                            ? NetworkImage(photoUrl)
+                            : AssetImage('assets/images/minion.png')
+                                as ImageProvider,
                       ),
                       Positioned(
                         child: GestureDetector(
