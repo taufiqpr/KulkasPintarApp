@@ -49,11 +49,23 @@ class UserProvider {
     }
   }
 
-  Future<bool> deleteUser() async {
-    final response = await http.delete(
-      Uri.parse('$baseUrl/delete_account'),
-      headers: headers,
-    );
-    return response.statusCode == 200;
+  Future<bool> deleteUser(String userId) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$baseUrl/profile/$userId'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        final message = jsonDecode(response.body)['message'];
+        Get.snackbar("Gagal", message ?? 'Gagal menghapus akun');
+        return false;
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Gagal menghapus akun: $e");
+      return false;
+    }
   }
 }

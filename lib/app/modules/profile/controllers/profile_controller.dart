@@ -1,4 +1,5 @@
 import 'package:fridgeeye/app/data/user_provider.dart';
+import 'package:fridgeeye/app/modules/login/controllers/login_controller.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
@@ -21,7 +22,7 @@ class ProfileController extends GetxController {
   }
 
   Future<void> updateUser(Map<String, dynamic> data) async {
-    final userId = userData['_id']; 
+    final userId = userData['_id'];
     if (userId == null) {
       Get.snackbar("Error", "ID user tidak ditemukan");
       return;
@@ -37,10 +38,32 @@ class ProfileController extends GetxController {
   }
 
   Future<void> deleteUser() async {
-    final success = await userProvider.deleteUser();
-    if (success) {
+    final userId = userData['_id'];
+    if (userId == null) {
+      Get.snackbar("Error", "ID user tidak ditemukan");
+      await Get.find<LoginController>().logout(); // tetap logout
       Get.offAllNamed('/login');
+      return;
+    }
+
+    final success = await userProvider.deleteUser(userId);
+    if (success) {
       Get.snackbar("Akun Dihapus", "Sampai jumpa lagi!");
+
+      // Delay biar snackbar sempat tampil
+      await Future.delayed(Duration(seconds: 1));
+
+      try {
+        await Get.find<LoginController>().logout(); // panggil logout
+      } catch (e) {
+        print("Error saat logout: $e");
+      }
+
+      // Pastikan controller dihapus dari memory
+      Get.delete<LoginController>();
+
+      // Navigasi ke login
+      Get.offAllNamed('/login');
     } else {
       Get.snackbar("Gagal", "Gagal menghapus akun");
     }

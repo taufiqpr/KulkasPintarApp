@@ -44,7 +44,6 @@ class LoginView extends GetView<LoginController> {
 
                 const SizedBox(height: 40),
 
-                // Logo/Icon section
                 Center(
                   child: Container(
                     width: 120,
@@ -271,7 +270,6 @@ class LoginView extends GetView<LoginController> {
 
                 const SizedBox(height: 20),
 
-                // Sign up link
                 Center(
                   child: TextButton(
                     onPressed: () => Get.toNamed('/register'),

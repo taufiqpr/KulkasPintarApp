@@ -61,40 +61,56 @@ class NotifView extends GetView<NotifController> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
-        child: SizedBox(
-          height: 64,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.home, color: Colors.grey),
-                onPressed: () {
-                  Get.toNamed('/home');
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.restaurant_menu, color: Colors.grey),
-                onPressed: () {
-                  Get.toNamed('/recipe');
-                },
-              ),
-              const SizedBox(width: 40),
-              IconButton(
-                icon: const Icon(Icons.notifications_none, color: Colors.teal),
-                onPressed: () {
-                  Get.toNamed('/notifications');
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.person_outline, color: Colors.grey),
-                onPressed: () {
-                  Get.toNamed('/profile');
-                },
-              ),
-            ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8,
+          elevation: 0,
+          color: Colors.white,
+          child: SizedBox(
+            height: 64,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.home, color: Colors.grey),
+                  onPressed: () {
+                    Get.toNamed('/home');
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.restaurant_menu, color: Colors.grey),
+                  onPressed: () {
+                    Get.toNamed('/recipe');
+                  },
+                ),
+                const SizedBox(width: 40),
+                IconButton(
+                  icon:
+                      const Icon(Icons.notifications_none, color: Colors.teal),
+                  onPressed: () {
+                    Get.toNamed('/notifications');
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.person_outline, color: Colors.grey),
+                  onPressed: () {
+                    Get.toNamed('/profile');
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -150,11 +150,32 @@ class ProfileView extends GetView<ProfileController> {
                   _menuTile(Icons.notifications, "Notifikasi",
                       () => Get.toNamed('/notifications')),
                   _menuTile(Icons.question_answer_sharp, "FAQ",
-                      () => Get.toNamed('/FAQ')),
+                      () => Get.toNamed('/webview')),
                   _menuTile(Icons.history_toggle_off_outlined, "Riwayat Login",
                       () => Get.toNamed('/history-login')),
+                  _menuTile(Icons.delete_outline, "Hapus Akun", () async {
+                    final confirm = await Get.dialog(AlertDialog(
+                      title: Text('Konfirmasi'),
+                      content: Text('Apakah kamu yakin ingin menghapus akun?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Get.back(result: false),
+                          child: Text('Batal'),
+                        ),
+                        TextButton(
+                          onPressed: () => Get.back(result: true),
+                          child: Text('Hapus',
+                              style: TextStyle(color: Colors.red)),
+                        ),
+                      ],
+                    ));
+
+                    if (confirm == true) {
+                      await controller
+                          .deleteUser(); // ini akan memicu logout dan navigasi
+                    }
+                  }),
                   const SizedBox(height: 20),
-                  Divider(color: Colors.grey.shade300, thickness: 1),
                   GestureDetector(
                     onTap: () {
                       controller.logout();
@@ -195,32 +216,56 @@ class ProfileView extends GetView<ProfileController> {
           }
         }),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
-        child: SizedBox(
-          height: 64,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.home, color: Colors.grey),
-                onPressed: () => Get.offNamed('/home'),
-              ),
-              IconButton(
-                icon: const Icon(Icons.restaurant_menu, color: Colors.grey),
-                onPressed: () => Get.toNamed('/recipe'),
-              ),
-              const SizedBox(width: 40),
-              IconButton(
-                icon: const Icon(Icons.notifications_none, color: Colors.grey),
-                onPressed: () => Get.toNamed('/notifications'),
-              ),
-              IconButton(
-                icon: const Icon(Icons.person, color: Colors.teal),
-                onPressed: () {},
-              ),
-            ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8,
+          elevation: 0,
+          color: Colors.white,
+          child: SizedBox(
+            height: 64,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.home, color: Colors.grey),
+                  onPressed: () {
+                    Get.toNamed('/home');
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.restaurant_menu, color: Colors.grey),
+                  onPressed: () {
+                    Get.toNamed('/recipe');
+                  },
+                ),
+                const SizedBox(width: 40),
+                IconButton(
+                  icon:
+                      const Icon(Icons.notifications_none, color: Colors.grey),
+                  onPressed: () {
+                    Get.toNamed('/notifications');
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.person_outline, color: Colors.teal),
+                  onPressed: () {
+                    Get.toNamed('/profile');
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

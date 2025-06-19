@@ -15,6 +15,7 @@ abstract class Routes {
   static const DETEKSI = _Paths.DETEKSI;
   static const HISTORY_LOGIN = _Paths.HISTORY_LOGIN;
   static const FAQ = _Paths.FAQ;
+  static const WEBVIEW_PAGE = _Paths.WEBVIEW_PAGE;
 }
 
 abstract class _Paths {
@@ -32,4 +33,5 @@ abstract class _Paths {
   static const DETEKSI = '/deteksi';
   static const HISTORY_LOGIN = '/history-login';
   static const FAQ = '/faq';
+  static const WEBVIEW_PAGE = '/webview-page';
 }

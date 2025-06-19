@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/FAQ/bindings/faq_binding.dart';
 import '../modules/FAQ/views/faq_view.dart';
+import '../modules/WebviewPage/bindings/webview_page_binding.dart';
+import '../modules/WebviewPage/views/webview_page_view.dart';
 import '../modules/detail/bindings/detail_binding.dart';
 import '../modules/detail/views/detail_view.dart';
 import '../modules/deteksi/bindings/deteksi_binding.dart';
@@ -81,6 +83,11 @@ class AppRoutes {
       name: '/FAQ',
       page: () => const FaqView(),
       binding: FaqBinding(),
+    ),
+    GetPage(
+      name: '/webview',
+      page: () => WebviewPageView(),
+      binding: WebviewPageBinding(),
     ),
   ];
 }

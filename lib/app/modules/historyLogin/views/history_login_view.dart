@@ -174,7 +174,6 @@ class HistoryLoginView extends GetView<HistoryLoginController> {
                               ],
                             ),
 
-                            // Location (if available)
                             if (item['location'] != null) ...[
                               const SizedBox(height: 4),
                               Row(
