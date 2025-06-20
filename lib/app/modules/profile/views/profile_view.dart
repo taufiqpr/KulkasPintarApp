@@ -150,6 +150,8 @@ class ProfileView extends GetView<ProfileController> {
                   _menuTile(Icons.notifications, "Notifikasi",
                       () => Get.toNamed('/notifications')),
                   _menuTile(Icons.question_answer_sharp, "FAQ",
+                      () => Get.toNamed('/FAQ')),
+                  _menuTile(Icons.insights_sharp, "Visualisasi",
                       () => Get.toNamed('/webview')),
                   _menuTile(Icons.history_toggle_off_outlined, "Riwayat Login",
                       () => Get.toNamed('/history-login')),
@@ -271,8 +273,14 @@ class ProfileView extends GetView<ProfileController> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
-        onPressed: () {},
-        child: const Icon(Icons.add),
+        onPressed: () {
+          Get.toNamed('/realtime');
+        },
+        shape: CircleBorder(),
+        child: const Icon(
+          Icons.photo_camera_outlined,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

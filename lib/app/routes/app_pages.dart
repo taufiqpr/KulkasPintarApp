@@ -6,8 +6,6 @@ import '../modules/WebviewPage/bindings/webview_page_binding.dart';
 import '../modules/WebviewPage/views/webview_page_view.dart';
 import '../modules/detail/bindings/detail_binding.dart';
 import '../modules/detail/views/detail_view.dart';
-import '../modules/deteksi/bindings/deteksi_binding.dart';
-import '../modules/deteksi/views/deteksi_view.dart';
 import '../modules/historyLogin/bindings/history_login_binding.dart';
 import '../modules/historyLogin/views/history_login_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -18,6 +16,8 @@ import '../modules/notif/bindings/notif_binding.dart';
 import '../modules/notif/views/notif_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/realtime/bindings/realtime_binding.dart';
+import '../modules/realtime/views/realtime_view.dart';
 import '../modules/recipe/bindings/recipe_binding.dart';
 import '../modules/recipe/views/recipe_view.dart';
 import '../modules/register/bindings/register_binding.dart';
@@ -70,11 +70,6 @@ class AppRoutes {
       binding: RegisterBinding(),
     ),
     GetPage(
-      name: '/deteksi',
-      page: () => DeteksiView(),
-      binding: DeteksiBinding(),
-    ),
-    GetPage(
       name: '/history-login',
       page: () => HistoryLoginView(),
       binding: HistoryLoginBinding(),
@@ -88,6 +83,11 @@ class AppRoutes {
       name: '/webview',
       page: () => WebviewPageView(),
       binding: WebviewPageBinding(),
+    ),
+    GetPage(
+      name: '/realtime',
+      page: () => RealtimeView(),
+      binding: RealtimeBinding(),
     ),
   ];
 }

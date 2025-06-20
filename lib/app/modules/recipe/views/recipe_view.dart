@@ -227,7 +227,7 @@ class RecipeView extends GetView<RecipeController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
         onPressed: () {
-          Get.toNamed('/deteksi');
+          Get.toNamed('/realtime');
         },
         shape: CircleBorder(),
         child: const Icon(

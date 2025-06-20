@@ -16,6 +16,7 @@ abstract class Routes {
   static const HISTORY_LOGIN = _Paths.HISTORY_LOGIN;
   static const FAQ = _Paths.FAQ;
   static const WEBVIEW_PAGE = _Paths.WEBVIEW_PAGE;
+  static const REALTIME = _Paths.REALTIME;
 }
 
 abstract class _Paths {
@@ -34,4 +35,5 @@ abstract class _Paths {
   static const HISTORY_LOGIN = '/history-login';
   static const FAQ = '/faq';
   static const WEBVIEW_PAGE = '/webview-page';
+  static const REALTIME = '/realtime';
 }
