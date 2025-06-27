@@ -4,7 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ApiProvider {
-  final String baseUrl = "https://fridge-eye-flask.vercel.app";
+  final String baseUrl = "https://fridge-eye-flask-ten.vercel.app";
   final box = GetStorage();
 
   Future<String?> registerUser(

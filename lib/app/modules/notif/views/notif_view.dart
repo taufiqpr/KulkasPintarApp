@@ -28,38 +28,39 @@ class NotifView extends GetView<NotifController> {
             )),
       ),
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(24.0),
-          children: [
-            _buildNotificationCard(
-              icon: Icons.warning_amber_rounded,
-              iconColor: Colors.red,
-              title: 'Pisang kamu tinggal 1 hari lagi!',
-              description: 'Segera olah jadi banana muffin sebelum busuk!',
-            ),
-            const SizedBox(height: 12),
-            _buildNotificationCard(
-              icon: Icons.info_outline,
-              iconColor: Colors.orange,
-              title: 'Wortel kamu mulai layu nih...',
-              description: 'Bikin tumisan yuk?',
-            ),
-            const SizedBox(height: 12),
-            _buildNotificationCard(
-              icon: Icons.info_outline,
-              iconColor: Colors.orange,
-              title: 'Brokoli kamu mulai tampak menguning',
-              description: 'Coba bikin sup hangat?',
-            ),
-            const SizedBox(height: 12),
-            _buildNotificationCard(
-              icon: Icons.check_circle_outline,
-              iconColor: Colors.teal,
-              title: 'Selamat kamu sudah menyelamatkan 2 bahan minggu ini!',
-              description: '',
-            ),
-          ],
-        ),
+        child: Obx(() {
+          final sudah = controller.alreadyExpired;
+          final hampir = controller.almostExpired;
+
+          if (sudah.isEmpty && hampir.isEmpty) {
+            return const Center(
+              child: Text(
+                'Tidak ada notifikasi',
+                style: TextStyle(fontSize: 16),
+              ),
+            );
+          }
+
+          return ListView(
+            padding: const EdgeInsets.all(24.0),
+            children: [
+              ...sudah.map((item) => _buildNotificationCard(
+                    icon: Icons.warning_amber_rounded,
+                    iconColor: Colors.red,
+                    title: '$item sudah busuk!',
+                    description:
+                        'Segera buang atau manfaatkan sebelum membusuk lebih lanjut!',
+                  )),
+              const SizedBox(height: 12),
+              ...hampir.map((item) => _buildNotificationCard(
+                    icon: Icons.info_outline,
+                    iconColor: Colors.orange,
+                    title: '$item hampir busuk',
+                    description: 'Coba diolah hari ini, yuk!',
+                  )),
+            ],
+          );
+        }),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

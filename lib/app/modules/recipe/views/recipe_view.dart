@@ -101,10 +101,6 @@ class RecipeView extends GetView<RecipeController> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    const Center(
-                        child: Text("Cek Semua Resep",
-                            style: TextStyle(color: Colors.teal))),
                   ],
                 ),
               ),

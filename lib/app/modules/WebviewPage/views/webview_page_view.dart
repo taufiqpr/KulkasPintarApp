@@ -14,7 +14,7 @@ class WebviewPageView extends GetView<WebviewPageController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notifikasi'),
+        title: const Text('VIsualisasi'),
         centerTitle: true,
       ),
       body: WebViewWidget(controller: controller),

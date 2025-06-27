@@ -1,4 +1,5 @@
 import 'package:fridgeeye/app/data/user_provider.dart';
+import 'package:fridgeeye/app/modules/home/controllers/home_controller.dart';
 import 'package:fridgeeye/app/modules/login/controllers/login_controller.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +31,12 @@ class ProfileController extends GetxController {
 
     final success = await userProvider.updateUser(userId, data);
     if (success) {
-      fetchUser();
+      fetchUser(); 
+
+      final homeController = Get.find<HomeController>();
+      homeController
+          .fetchUser(); 
+
       Get.snackbar("Berhasil", "Data berhasil diupdate");
     } else {
       Get.snackbar("Gagal", "Gagal update data");

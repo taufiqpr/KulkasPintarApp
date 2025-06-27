@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -31,47 +32,65 @@ class HomeView extends GetView<HomeController> {
             const SizedBox(height: 16),
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                'assets/images/unsplash_AEU9UZstCfs.png',
-                height: 200,
+              child: Lottie.asset(
+                'assets/images/cooking.json',
+                height: 230,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
+                alignment: Alignment.center,
+                repeat: true,
+                animate: true,
               ),
             ),
             const SizedBox(height: 20),
-            _buildFruitItem(
-              name: 'Apel',
-              image: 'assets/images/Ellipse 1.png',
-              status: 'Disarankan dibuang',
-              freshness: 'Kesegaran : Buruk',
-              description:
-                  'Apel sudah mulai membusuk, sebaiknya dibuang untuk menghindari kontaminasi makanan lainnya.',
-              days: '0 Hari',
-              purchaseDate: '10 Mei 2025',
-              expiryDate: '21 Mei 2025',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Daftar Buah',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Arahkan ke halaman tambah buah
+                    Get.toNamed('/add-fruit');
+                  },
+                  icon: const Icon(Icons.add, size: 18),
+                  label: const Text('Tambah'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    foregroundColor: Colors.white,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    textStyle: const TextStyle(fontSize: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            _buildFruitItem(
-              name: 'Wortel',
-              image: 'assets/images/unsplash_R198mTymEFQ.png',
-              status: 'kadaluwarsa dalam 6 hari',
-              freshness: 'Kesegaran : Sangat Baik',
-              description:
-                  'Biar wortel nggak cepat layu, simpan dalam plastik berlubang di laci sayur kulkas, ya! Kupasnya nanti aja pas mau dimasak',
-              days: '6 Hari',
-              purchaseDate: '15 Mei 2025',
-              expiryDate: '21 Mei 2025',
-            ),
-            _buildFruitItem(
-              name: 'Tomat',
-              image: 'assets/images/Ellipse 1-2.png',
-              status: 'kadaluwarsa dalam 4 hari',
-              freshness: 'Kesegaran : Cukup',
-              description:
-                  'Tomat sebaiknya disimpan di tempat sejuk, bukan di dalam kulkas. Jika sudah matang, bisa masuk kulkas agar lebih awet.',
-              days: '4 Hari',
-              purchaseDate: '17 Mei 2025',
-              expiryDate: '21 Mei 2025',
-            ),
+            const SizedBox(height: 12),
+            Obx(() {
+              return Column(
+                children: controller.fruits.map((fruit) {
+                  return _buildFruitItem(
+                    name: fruit['name'],
+                    image: fruit['image'],
+
+                    status: fruit['daysLeft'] <= 0
+                        ? 'Disarankan dibuang'
+                        : 'kadaluwarsa dalam ${fruit['daysLeft']} hari',
+                    freshness: getFreshnessStatus(fruit['daysLeft']),
+                    description: 'Deskripsi buah otomatis atau statis',
+                    days: '${fruit['daysLeft']} Hari',
+                    purchaseDate:
+                        formatDate(fruit['purchaseDate']), // fungsi bantu
+                    expiryDate: formatDate(fruit['expiryDate']),
+                  );
+                }).toList(),
+              );
+            }),
           ],
         ),
       ),
@@ -141,6 +160,35 @@ class HomeView extends GetView<HomeController> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+
+  String getFreshnessStatus(int daysLeft) {
+    if (daysLeft >= 5) return 'Kesegaran : Sangat Baik';
+    if (daysLeft >= 2) return 'Kesegaran : Cukup';
+    return 'Kesegaran : Buruk';
+  }
+
+  String formatDate(DateTime date) {
+    return '${date.day} ${_monthName(date.month)} ${date.year} - '
+        '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')} WIB';
+  }
+
+  String _monthName(int month) {
+    const months = [
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember'
+    ];
+    return months[month - 1];
   }
 
   Widget _buildFruitItem({

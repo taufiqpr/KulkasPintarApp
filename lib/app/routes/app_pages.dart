@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/AddFruit/bindings/add_fruit_binding.dart';
+import '../modules/AddFruit/views/add_fruit_view.dart';
 import '../modules/FAQ/bindings/faq_binding.dart';
 import '../modules/FAQ/views/faq_view.dart';
 import '../modules/WebviewPage/bindings/webview_page_binding.dart';
@@ -88,6 +90,11 @@ class AppRoutes {
       name: '/realtime',
       page: () => RealtimeView(),
       binding: RealtimeBinding(),
+    ),
+    GetPage(
+      name: '/add-fruit',
+      page: () => AddFruitView(),
+      binding: AddFruitBinding(),
     ),
   ];
 }

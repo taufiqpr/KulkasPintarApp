@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fridgeeye/app/modules/welcome/views/welcome2_view.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({Key? key}) : super(key: key);
@@ -17,8 +18,8 @@ class WelcomeView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
-                'assets/images/Group 6819.png',
+              Lottie.asset(
+                'assets/images/recipe.json',
                 height: size.height * 0.55,
               ),
               Column(
@@ -77,8 +78,7 @@ class WelcomeView extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       Get.to(() => const Welcome2View(),
-                          transition:
-                              Transition.rightToLeft, 
+                          transition: Transition.rightToLeft,
                           duration: const Duration(milliseconds: 400));
                     },
                     child: const Text(

@@ -17,33 +17,6 @@ class LoginView extends GetView<LoginController> {
               children: [
                 const SizedBox(height: 40),
 
-                // Back button
-                GestureDetector(
-                  onTap: () => Get.back(),
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.black87,
-                      size: 20,
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 40),
-
                 Center(
                   child: Container(
                     width: 120,
