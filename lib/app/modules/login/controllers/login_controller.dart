@@ -31,6 +31,7 @@ class LoginController extends GetxController {
       String token = response['token'];
       print("JWT Token: $token");
 
+      await Future.delayed(Duration(seconds: 1));
       Get.offAllNamed('/home');
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -43,9 +44,7 @@ class LoginController extends GetxController {
     try {
       isLoading(true);
 
-      
       await googleSignIn.signOut();
-
 
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
@@ -84,7 +83,6 @@ class LoginController extends GetxController {
     }
   }
 
-
   Future<void> logoutGoogle() async {
     try {
       await googleSignIn.signOut();
@@ -94,10 +92,9 @@ class LoginController extends GetxController {
     }
   }
 
-  
   Future<void> logout() async {
     await logoutGoogle();
-    box.erase(); 
+    box.erase();
     Get.offAllNamed('/login');
   }
 }

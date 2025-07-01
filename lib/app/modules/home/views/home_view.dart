@@ -14,21 +14,41 @@ class HomeView extends GetView<HomeController> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           children: [
-            const Text(
-              '👋 Selamat Datang',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-            const SizedBox(height: 4),
-            Obx(() {
-              final user = controller.userData;
-              return Text(
-                user['username'] ?? '',
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "👋 Selamat Datang",
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    Obx(() {
+                      final user = controller.userData;
+                      return Text(
+                        user['username'] ?? '',
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    }),
+                  ],
                 ),
-              );
-            }),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    'assets/images/Logo 1.png',
+                    height: 48,
+                    width: 48,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
             ClipRRect(
               borderRadius: BorderRadius.circular(16),

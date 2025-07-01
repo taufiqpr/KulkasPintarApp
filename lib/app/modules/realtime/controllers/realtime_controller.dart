@@ -130,7 +130,7 @@ class RealtimeController extends GetxController {
     try {
       final request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://192.168.145.51:5000/predict'), // Update your Flask server IP
+        Uri.parse('https://modelfridgeye-production.up.railway.app/predict'),
       );
 
       request.files.add(await http.MultipartFile.fromPath('image', image.path));

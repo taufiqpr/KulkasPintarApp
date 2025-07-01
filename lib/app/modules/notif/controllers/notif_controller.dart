@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class NotifController extends GetxController {
+  final box = GetStorage();
   var alreadyExpired = <String>[].obs;
   var almostExpired = <String>[].obs;
 
@@ -30,8 +32,8 @@ class NotifController extends GetxController {
   void showNotification(String title, String body) async {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
-      'fruit_channel', 
-      'Notifikasi Buah', 
+      'fruit_channel', // ID channel
+      'Notifikasi Buah', // Nama channel
       channelDescription: 'Notifikasi untuk buah yang hampir atau sudah busuk',
       importance: Importance.max,
       priority: Priority.high,
@@ -49,9 +51,13 @@ class NotifController extends GetxController {
   }
 
   Future<void> fetchNotifications() async {
+    final token = box.read('token');
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/notifications'),
+        Uri.parse('https://modelfridgeye-production.up.railway.app/notifications'),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
       );
 
       if (response.statusCode == 200) {

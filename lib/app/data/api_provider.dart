@@ -69,7 +69,10 @@ class ApiProvider {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/login'),
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token"
+        },
         body: jsonEncode({'email': email, 'password': password}),
       );
       if (response.statusCode == 200) {

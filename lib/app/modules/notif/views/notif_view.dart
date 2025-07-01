@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/notif_controller.dart';
 
 class NotifView extends GetView<NotifController> {
@@ -21,11 +19,12 @@ class NotifView extends GetView<NotifController> {
           onPressed: () => Get.back(),
         ),
         bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1.0),
-            child: Container(
-              color: Colors.grey.shade300,
-              height: 1.0,
-            )),
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey.shade300,
+            height: 1.0,
+          ),
+        ),
       ),
       body: SafeArea(
         child: Obx(() {
@@ -44,20 +43,10 @@ class NotifView extends GetView<NotifController> {
           return ListView(
             padding: const EdgeInsets.all(24.0),
             children: [
-              ...sudah.map((item) => _buildNotificationCard(
-                    icon: Icons.warning_amber_rounded,
-                    iconColor: Colors.red,
-                    title: '$item sudah busuk!',
-                    description:
-                        'Segera buang atau manfaatkan sebelum membusuk lebih lanjut!',
-                  )),
-              const SizedBox(height: 12),
-              ...hampir.map((item) => _buildNotificationCard(
-                    icon: Icons.info_outline,
-                    iconColor: Colors.orange,
-                    title: '$item hampir busuk',
-                    description: 'Coba diolah hari ini, yuk!',
-                  )),
+              ..._buildNotificationList(sudah, isExpired: true),
+              if (sudah.isNotEmpty && hampir.isNotEmpty)
+                const SizedBox(height: 24),
+              ..._buildNotificationList(hampir, isExpired: false),
             ],
           );
         }),
@@ -120,7 +109,7 @@ class NotifView extends GetView<NotifController> {
         onPressed: () {
           Get.toNamed('/realtime');
         },
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         child: const Icon(
           Icons.photo_camera_outlined,
           color: Colors.white,
@@ -176,5 +165,27 @@ class NotifView extends GetView<NotifController> {
         ],
       ),
     );
+  }
+
+  List<Widget> _buildNotificationList(List<String> items,
+      {required bool isExpired}) {
+    return List<Widget>.generate(items.length, (index) {
+      final item = items[index];
+      final isLast = index == items.length - 1;
+
+      return Column(
+        children: [
+          _buildNotificationCard(
+            icon: isExpired ? Icons.warning_amber_rounded : Icons.info_outline,
+            iconColor: isExpired ? Colors.red : Colors.orange,
+            title: isExpired ? '$item sudah busuk!' : '$item hampir busuk',
+            description: isExpired
+                ? 'Segera buang atau manfaatkan sebelum membusuk lebih lanjut!'
+                : 'Coba diolah hari ini, yuk!',
+          ),
+          if (!isLast) const SizedBox(height: 12),
+        ],
+      );
+    });
   }
 }

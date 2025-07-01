@@ -71,35 +71,7 @@ class RecipeDetailPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    Image.network(
-                      detail['image'] ?? '',
-                      width: double.infinity,
-                      height: 220,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Image.network(
-                          'https://example.com/default-image.jpg',
-                          width: double.infinity,
-                          height: 220,
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    ),
-                    Positioned(
-                      top: 16,
-                      left: 16,
-                      child: GestureDetector(
-                        onTap: () => Get.back(),
-                        child: const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.arrow_back, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                g
                 Container(
                   margin: const EdgeInsets.only(top: 16),
                   padding: const EdgeInsets.all(20),

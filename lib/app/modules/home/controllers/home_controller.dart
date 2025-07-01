@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:fridgeeye/app/data/user_provider.dart';
 
 class HomeController extends GetxController {
-  final String baseUrl = "http://127.0.0.1:5000";
+  final String baseUrl = "https://modelfridgeye-production.up.railway.app";
   final userData = {}.obs;
   final _userProvider = Get.find<UserProvider>();
+  final box = GetStorage();
   var fruits = <Map<String, dynamic>>[].obs;
 
   void addFruit(Map<String, dynamic> fruitData) {
@@ -21,8 +23,12 @@ class HomeController extends GetxController {
   }
 
   Future<void> fetchFruits() async {
+    final token = box.read('token');
     try {
-      final response = await http.get(Uri.parse('$baseUrl/fruits'));
+      final response = await http.get(Uri.parse('$baseUrl/fruits'), headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
 
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
@@ -49,10 +55,14 @@ class HomeController extends GetxController {
   }
 
   Future<void> addFruitToBackend(Map<String, dynamic> fruitData) async {
+    final token = box.read('token');
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/fruits'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
         body: jsonEncode(fruitData),
       );
 
